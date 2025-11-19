@@ -1,0 +1,53 @@
+#include <stdio.h>
+
+int main() {
+    int pilihan;
+    float V, I, R;
+
+    printf("=== KALKULATOR HUKUM OHM ===\n");
+    printf("Rumus dasar: V = I × R\n\n");
+
+    printf("Pilih yang ingin dihitung:\n");
+    printf("1. Tegangan (V)\n");
+    printf("2. Arus (I)\n");
+    printf("3. Hambatan (R)\n");
+    printf("Pilihan: ");
+    scanf("%d", &pilihan);
+
+    switch (pilihan) {
+        case 1:
+            printf("\n=== Hitung Tegangan (V) ===\n");
+            printf("Masukkan arus (I) dalam ampere: ");
+            scanf("%f", &I);
+            printf("Masukkan hambatan (R) dalam ohm: ");
+            scanf("%f", &R);
+            V = I * R;
+            printf("Tegangan (V) = %.2f volt\n", V);
+            break;
+
+        case 2:
+            printf("\n=== Hitung Arus (I) ===\n");
+            printf("Masukkan tegangan (V) dalam volt: ");
+            scanf("%f", &V);
+            printf("Masukkan hambatan (R) dalam ohm: ");
+            scanf("%f", &R);
+            I = V / R;
+            printf("Arus (I) = %.2f ampere\n", I);
+            break;
+
+        case 3:
+            printf("\n=== Hitung Hambatan (R) ===\n");
+            printf("Masukkan tegangan (V) dalam volt: ");
+            scanf("%f", &V);
+            printf("Masukkan arus (I) dalam ampere: ");
+            scanf("%f", &I);
+            R = V / I;
+            printf("Hambatan (R) = %.2f ohm\n", R);
+            break;
+
+        default:
+            printf("Pilihan tidak valid!\n");
+    }
+
+    return 0;
+}
