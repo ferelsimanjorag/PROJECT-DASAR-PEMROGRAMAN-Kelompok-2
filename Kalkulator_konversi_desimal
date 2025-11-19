@@ -1,0 +1,150 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+// Fungsi konversi Desimal ke Biner
+void decimalToBinary(int n) {
+    int binary[32], i = 0;
+    if (n == 0) {
+        printf("Biner: 0\n");
+        return;
+    }
+    while (n > 0) {
+        binary[i++] = n % 2;
+        n /= 2;
+    }
+    printf("Biner: ");
+    for (int j = i - 1; j >= 0; j--)
+        printf("%d", binary[j]);
+    printf("\n");
+}
+
+// Desimal → Oktal
+void decimalToOctal(int n) {
+    int octal[32], i = 0;
+    if (n == 0) {
+        printf("Oktal: 0\n");
+        return;
+    }
+    while (n > 0) {
+        octal[i++] = n % 8;
+        n /= 8;
+    }
+    printf("Oktal: ");
+    for (int j = i - 1; j >= 0; j--)
+        printf("%d", octal[j]);
+    printf("\n");
+}
+
+// Desimal → Hex
+void decimalToHex(int n) {
+    char hex[32];
+    int i = 0;
+    if (n == 0) {
+        printf("Hexadesimal: 0\n");
+        return;
+    }
+    while (n > 0) {
+        int temp = n % 16;
+        if (temp < 10) hex[i++] = temp + '0';
+        else hex[i++] = temp - 10 + 'A';
+        n /= 16;
+    }
+    printf("Hexadesimal: ");
+    for (int j = i - 1; j >= 0; j--)
+        printf("%c", hex[j]);
+    printf("\n");
+}
+
+// Biner → Desimal
+int binaryToDecimal(char *bin) {
+    int len = strlen(bin);
+    int base = 1, value = 0;
+
+    for (int i = len - 1; i >= 0; i--) {
+        if (bin[i] == '1') value += base;
+        base *= 2;
+    }
+    return value;
+}
+
+// Oktal → Desimal
+int octalToDecimal(char *oct) {
+    int len = strlen(oct);
+    int base = 1, value = 0;
+
+    for (int i = len - 1; i >= 0; i--) {
+        value += (oct[i] - '0') * base;
+        base *= 8;
+    }
+    return value;
+}
+
+// Hex → Desimal
+int hexToDecimal(char *hex) {
+    int len = strlen(hex);
+    int base = 1, value = 0;
+
+    for (int i = len - 1; i >= 0; i--) {
+        char c = hex[i];
+        int temp = 0;
+
+        if (c >= '0' && c <= '9') temp = c - '0';
+        else if (c >= 'A' && c <= 'F') temp = c - 'A' + 10;
+        else if (c >= 'a' && c <= 'f') temp = c - 'a' + 10;
+
+        value += temp * base;
+        base *= 16;
+    }
+    return value;
+}
+
+
+int main() {
+    int pilihan;
+    char input[50];
+    int des;
+
+    printf("=== Kalkulator Konversi Bilangan ===\n");
+    printf("1. Desimal ke Biner/Oktal/Hex\n");
+    printf("2. Biner ke Desimal\n");
+    printf("3. Oktal ke Desimal\n");
+    printf("4. Hex ke Desimal\n");
+    printf("Pilih menu: ");
+    scanf("%d", &pilihan);
+
+    switch (pilihan) {
+    case 1:
+        printf("Masukkan bilangan desimal: ");
+        scanf("%d", &des);
+        decimalToBinary(des);
+        decimalToOctal(des);
+        decimalToHex(des);
+        break;
+
+    case 2:
+        printf("Masukkan bilangan biner: ");
+        scanf("%s", input);
+        printf("Desimal: %d\n", binaryToDecimal(input));
+        break;
+
+    case 3:
+        printf("Masukkan bilangan oktal: ");
+        scanf("%s", input);
+        printf("Desimal: %d\n", octalToDecimal(input));
+        break;
+
+    case 4:
+        printf("Masukkan bilangan hexadesimal: ");
+        scanf("%s", input);
+        printf("Desimal: %d\n", hexToDecimal(input));
+        break;
+
+    default:
+        printf("Pilihan tidak valid!\n");
+    }
+
+    return 0;
+}
+
